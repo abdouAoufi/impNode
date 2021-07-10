@@ -1,12 +1,8 @@
 const express = require("express");
-const path = require("path");
-const root = require("../helper/path");
+const AboutController = require("../controllers/AboutController");
 
 const router = express.Router();
 
-router.get("/about", (req, res, next) => {
-  res.sendFile(path.join(root, "views", "about.html"));
-});
+router.get("/about", AboutController.getAbout);
 
-
-module.exports = router ;
+module.exports = router;
