@@ -1,4 +1,5 @@
-const Order = require("../model/order");
+const Order = require("../model/order"); // We got here A model !!
+const TreatList = require("../model/treatList");
 
 exports.addOrder = (req, res, next) => {
   const order = new Order(
@@ -10,6 +11,7 @@ exports.addOrder = (req, res, next) => {
   order.save();
   res.redirect("/");
 };
+// this is resposable about to send all orders
 exports.getAllOrders = (req, res, next) => {
   Order.getOrders((orders) => {
     res.render("order", {
@@ -24,14 +26,21 @@ exports.getHome = (req, res, next) => {
 };
 
 exports.getDetails = (req, res) => {
-  Order.findByName((orders) => {
-    const order = orders.find((order) => order.name === req.params.orderName);
+  Order.findByName(req.params.orderName, (order) => {
     res.render("detail", { pageTitle: order.name, order });
   });
 };
 
+exports.postToTreat = (req, res) => {
+  const orderName = req.body.productName;
+  Order.findByName(orderName, (order) => {
+    TreatList.addItem(order);
+  });
+  res.redirect("/");
+};
 
-exports.postToTreat = (req , res) => {
-  console.log(req.body);
-  res.redirect("/")
-}
+exports.getTreatList = (req, res) => {
+  TreatList.getList((orders) => {
+    res.render("treat.ejs", { pageTitle: "Treat list", tratList: orders });
+  });
+};

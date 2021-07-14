@@ -1,6 +1,7 @@
-const root = require("../helper/path");
 const fs = require("fs");
 const path = require("path");
+
+// define path globally
 const p = path.join(
   path.dirname(process.mainModule.filename),
   "data",
@@ -9,8 +10,8 @@ const p = path.join(
 
 const getOrdersFromFiles = (cb) => {
   fs.readFile(p, (err, content) => {
-    if (err) return cb( []);
-    cb(JSON.parse(content));
+    if (err) return cb( []); // in this case it gives us empty array 
+    cb(JSON.parse(content)); // in this case it gives us array contains all orders .....
   });
 };
 module.exports = class Order {
@@ -32,7 +33,13 @@ module.exports = class Order {
   static getOrders(callback) {
     return getOrdersFromFiles(callback);
   }
-  static findByName(callback) {
-    getOrdersFromFiles(callback);
+  static findByName(name , callback) {
+    let order ;
+    getOrdersFromFiles(orders => {
+      order = orders.find(o => o.name === name)
+      if(order){
+        callback(order);
+      }
+    });
   }
 };

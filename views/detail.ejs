@@ -5,15 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= pageTitle %> </title>
+    <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
-    <div>
-       <h1><%= order.mark %> </h1>
-       <h2><%= order.name %> </h2>
-       <h3><%= order.model %> </h3>
-       <h4><%= order.date %> </h4>
+    <%- include("./includes/navigation.ejs") %> 
+    <div class="mt-2 mx-4 border rounded p-4 inline-block shadow">
+       <h1>mark : <%= order.mark %> </h1>
+       <h2>name : <%= order.name %> </h2>
+       <h3>model : <%= order.model %> </h3>
+       <h4>date : <%= order.date %> </h4>
        <form action="/treat" method="post">
-        <button type="submit" class="p-4 bg-red-300 text-white font-semibold">Add to cart</button>
+        <button type="submit" class="p-2 mt-4 mx-auto rounded bg-red-300 text-white font-thin">Treat</button>
         <input type="hidden" name="productName" value="<%= order.name %>">
       </form>
     </div>
