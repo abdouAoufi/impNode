@@ -11,12 +11,17 @@
     <main>
       <div class="p-4 mx-auto">
         <% for( let order of orderList) { %>
-        <div class="border p-4 inline-block">
-          <p>mark : <%= order.mark %></p>
-          <p>name : <%= order.name %></p>
-          <p>model : <%= order.model %></p>
-          <p>date : <%= order.date %></p>
-          <a href="/details/<%= order.name %> " class="text-blue-400 font-bold"> more details </a>
+        <div class="border p-4 inline-block rounded shadow-sm">
+          <p class="text-red-300">mark : <span class="text-green-400"> <%= order.mark %></span></p>
+          <p class="text-red-300">name : <span class="text-green-400"><%= order.name %></span></p>
+          <p class="text-red-300">model : <span class="text-green-400"><%= order.model %></span></p>
+          <p class="text-red-300">date : <span class="text-green-400"><%= order.date %></span></p>
+          <a
+            href="/details/<%= order.name %> "
+            class="text-blue-400 font-semibold italic"
+          >
+            more details
+          </a>
         </div>
         <% } %>
       </div>

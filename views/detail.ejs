@@ -12,6 +12,10 @@
        <h2><%= order.name %> </h2>
        <h3><%= order.model %> </h3>
        <h4><%= order.date %> </h4>
+       <form action="/treat" method="post">
+        <button type="submit" class="p-4 bg-red-300 text-white font-semibold">Add to cart</button>
+        <input type="hidden" name="productName" value="<%= order.name %>">
+      </form>
     </div>
   </body>
 </html>

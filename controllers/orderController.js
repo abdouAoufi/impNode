@@ -29,3 +29,9 @@ exports.getDetails = (req, res) => {
     res.render("detail", { pageTitle: order.name, order });
   });
 };
+
+
+exports.postToTreat = (req , res) => {
+  console.log(req.body);
+  res.redirect("/")
+}
